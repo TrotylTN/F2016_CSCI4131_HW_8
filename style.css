@@ -169,3 +169,12 @@ table.warn, td.warn, tr.warn {
     width: 800px;
     color: red;
 }
+
+table.login, td.login, tr.login {
+    border: 0px;
+    background-color: #D2B4DE;
+}
+
+td.login, tr.login {
+    width: 300px;
+}
