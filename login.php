@@ -44,12 +44,12 @@
                     }                       
                     $loginname = $_POST["login"];
                     $passwd = $_POST["password"];
-                    $result = mysqli_query($con,"SELECT acc_password,acc_name FROM tbl_accounts;");
+                    $result = mysqli_query($con,"SELECT acc_password,acc_name FROM tbl_accounts WHERE acc_login='".$loginname."';");
                     // echo $result->num_rows;
                     if ($result->num_rows == 0)
                         echo "Account doesn't exist. Please check the login name again.";
                     else {
-                        $obj = $obj = $result->fetch_object();
+                        $obj = $result->fetch_object();
                         $svpasswd = $obj->acc_password;
                         $svname = $obj->acc_name;
                         if ($svpasswd != sha1($passwd)) {
@@ -58,6 +58,7 @@
                             session_start();
                             $_SESSION['username'] = $svname;
                             $_SESSION['ACKed'] = 'yes';
+                            $_SESSION['login'] = $loginname;
                             header("Location: ./calendar.php?".SID);
                         }
                     }

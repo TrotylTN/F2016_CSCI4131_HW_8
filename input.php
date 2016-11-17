@@ -13,10 +13,10 @@
         <div>
         <h2 class="tntitle"> Calendar Input </h2>      
         <?php
-            session_start();    
-            // echo var_dump($_SESSION);
+            session_start();
             if ($_SESSION["ACKed"] == 'yes') {
                 echo "<span style='margin-left: 40px; font-weight: bold'>Welcome " . $_SESSION['username'] . '</span><br>';
+                $loginname = $_SESSION['login'];
             } else {
                 echo "<p style='color: red; font-weight: bold; margin-left: 40px;'>Please login first. <a href='./login.php'> Click here to login. </a></p>";
                 die();
@@ -33,9 +33,9 @@
         <table class="warn"> <tr class="warn"> <td class="warn">
             <?php 
                 if ($_POST["clearall"] == 'confirm') {
-                    $jsonfile = fopen("calendar.txt", "w") or die("Unable to clean file!");
+                    $jsonfile = fopen($loginname."_calendar.txt", "w") or die("Unable to clean file!");
                     fclose($jsonfile);
-                    header('Location: ./calendar.php');
+                    header('Location: ./calendar.php?'.SID);
                 }
                 if ($_POST["passdata"] == 'submitted') {
                     $AllOK = true;
@@ -59,11 +59,6 @@
                         $AllOK = false;
                     }
 
-                    if ($_POST["url"] == "") {
-                        echo "Please enter a picture URL for the event<br>";
-                        $AllOK = false;
-                    }
-
                     if ($AllOK && ($_POST["starttime"] > $_POST["endtime"])) {
                         echo "Please enter a endtime which is later than the start time<br>";
                         $AllOK = false;
@@ -75,14 +70,13 @@
                                          'endtime' => $_POST["endtime"],
                                          'location' => $_POST["location"],
                                          'day' => $_POST["day"],
-                                         'url' => $_POST["url"]
                                          );
                         $jsonstring = json_encode($jsonarr);
-                        $jsonfile = fopen("calendar.txt", "a") or die("Unable to open file!");
+                        $jsonfile = fopen($loginname."_calendar.txt", "a") or die("Unable to open file!");
                         fwrite($jsonfile, $jsonstring);
                         fwrite($jsonfile, "\n");
                         fclose($jsonfile);
-                        header('Location: ./calendar.php');
+                        header('Location: ./calendar.php?'.SID);
                     }                
                 }
           ?>
@@ -137,14 +131,6 @@
                         <option value="Fri">Fri</option>
                     </select>
                 </p>
-                </td>
-            </tr>
-            <tr class="input">
-                <td class="input">
-                    <p> <span class="sub"> Picture URL: </span> </p>
-                </td>
-                <td class="input">
-                    <p> <input type="url" name="url"> </p>
                 </td>
             </tr>
             <tr class="input">

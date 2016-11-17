@@ -13,6 +13,7 @@
             session_start();
             $_SESSION["ACKed"] = '';
             $_SESSION["username"] = '';
+            $_SESSION["login"] = '';
         ?>        
         <h2 class="tntitle"> You have successfully logged out! </h2>
         <p style="font-weight: bold; margin-left: 40px;">
