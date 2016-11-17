@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <title>
-        Tiannan's Calendar
+        My Calendar
     </title>
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLvHU7BAexcgc-wuWvEzQg6OHMBo_7Le8&libraries=places">
@@ -15,10 +15,23 @@
 
 <body>
     <div>
-    <h2 class="tntitle"> Tiannan's Calendar </h2>
+    <h2 class="tntitle"> My Calendar </h2>
+    <?php
+        session_start();    
+        // echo var_dump($_SESSION);
+        if ($_SESSION["ACKed"] == 'yes') {
+            echo "<span style='margin-left: 40px; font-weight: bold'>Welcome " . $_SESSION['username'] . '</span><br>';
+        } else {
+            echo "<p style='color: red; font-weight: bold; margin-left: 40px;'>Please login first. <a href='./login.php'> Click here to login. </a></p>";
+            die();
+        }
+    ?>
+    <p>
+    <button style='margin-left: 40px;' onclick="{location.href='./logout.php?<?php echo SID; ?>'}">Logout</button>
+    </p>
     <nav class="cal">
-        <button class="navlink" onclick="{location.href='./calendar.php'}">My Calendar</button>
-        <button class="navlink" onclick="{location.href='./input.php'}">Form Input</button>
+        <button class="navlink" onclick="{location.href='./calendar.php?<?php echo SID; ?>'}">My Calendar</button>
+        <button class="navlink" onclick="{location.href='./input.php?<?php echo SID; ?>'}">Form Input</button>
     </nav>
     </div>
 

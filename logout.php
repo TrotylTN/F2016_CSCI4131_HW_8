@@ -1,7 +1,22 @@
-<?php
-      $db_servername = 'egon.cs.umn.edu';
-      $db_port = 3307;
-      $db_name = 'C4131F16U128';  //Note xxx is a number, you can find it on moodle
-      $db_username = 'C4131F16U128';
-      $db_password = 18606;  // This should be on moodle as well.
-?>
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Login Page
+        </title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <?php
+            session_start();
+            $_SESSION["ACKed"] = '';
+            $_SESSION["username"] = '';
+        ?>        
+        <h2 class="tntitle"> You have successfully logged out! </h2>
+        <p style="font-weight: bold; margin-left: 40px;">
+            If you wanna log back, <a href='./login.php'> click here. </a>
+        </p>
+    </body>
+</html>
