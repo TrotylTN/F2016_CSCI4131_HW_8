@@ -18,7 +18,9 @@
                 echo "<span style='margin-left: 40px; font-weight: bold'>Welcome " . $_SESSION['username'] . '</span><br>';
                 $loginname = $_SESSION['login'];
             } else {
-                echo "<p style='color: red; font-weight: bold; margin-left: 40px;'>Please login first. <a href='./login.php'> Click here to login. </a></p>";
+                echo "<p style='color: red; font-weight: bold; margin-left: 40px;'> Please login first. </p>";
+                echo "<p style='font-weight: bold; margin-left: 40px;'> If your browser didn't redirect automatically, <a href='./login.php'> click here to login. </a></p>";
+                header("Location: ./login.php");
                 die();
             }
         ?>
