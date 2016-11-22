@@ -11,7 +11,7 @@
     <body>
         <?php
             session_start();
-            $_SESSION["ACKed"] = '';
+            $_SESSION["ACKed"] = 'no';
             $_SESSION["username"] = '';
             $_SESSION["login"] = '';
         ?>        
